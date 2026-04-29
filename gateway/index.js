@@ -19,6 +19,26 @@ const limiter = rateLimit({
 // Apply rate limiter to all requests
 app.use(limiter);
 
+const jwt = require('jsonwebtoken');
+
+// JWT Middleware
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ error: 'Access denied. No token provided.' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ error: 'Invalid or expired token.' });
+        }
+        req.user = user;
+        next();
+    });
+};
+
 // Target URLs for microservices
 const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || 'http://localhost:3001';
 const EMPLOYEE_SERVICE_URL = process.env.EMPLOYEE_SERVICE_URL || 'http://localhost:8000';
@@ -30,17 +50,16 @@ app.use('/api/auth', createProxyMiddleware({
     changeOrigin: true,
 }));
 
-app.use('/api/employees', createProxyMiddleware({
+// Protected Routes
+app.use('/api/employees', authenticateToken, createProxyMiddleware({
     target: EMPLOYEE_SERVICE_URL,
     changeOrigin: true,
 }));
 
-app.use('/api/attendance', createProxyMiddleware({
+app.use('/api/attendance', authenticateToken, createProxyMiddleware({
     target: ATTENDANCE_SERVICE_URL,
     changeOrigin: true,
 }));
-
-// We will add JWT validation middleware here in Day 5
 
 app.get('/', (req, res) => {
     res.json({ message: 'API Gateway is running' });
