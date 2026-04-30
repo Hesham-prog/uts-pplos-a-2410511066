@@ -5,6 +5,9 @@
 **Topik**: Sistem Kepegawaian & Absensi (Manajemen pegawai, absensi, pengajuan cuti, rekap kehadiran)  
 **OAuth**: Google OAuth 2.0  
 
+## 🎥 Demo Video
+**Link YouTube**: [MASUKKAN_LINK_YOUTUBE_UNLISTED_ANDA_DI_SINI]
+
 ## Arsitektur
 Sistem ini dibangun menggunakan arsitektur Microservices dengan komponen berikut:
 1. **API Gateway** (Node.js/Express): Entry point, JWT Validation, Rate Limiting.
