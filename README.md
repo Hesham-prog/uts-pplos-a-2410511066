@@ -6,7 +6,7 @@
 **Topik**: Sistem Kepegawaian & Absensi 
 **OAuth**: Google OAuth 2.0  
 
-## 🎥 Demo Video
+## Demo Video
 **Link YouTube**: https://youtu.be/SmUqCkLDDlg
 
 ## Arsitektur
