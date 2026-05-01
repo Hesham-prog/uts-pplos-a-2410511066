@@ -48,17 +48,20 @@ const ATTENDANCE_SERVICE_URL = process.env.ATTENDANCE_SERVICE_URL || 'http://loc
 app.use('/api/auth', createProxyMiddleware({
     target: AUTH_SERVICE_URL,
     changeOrigin: true,
+    pathRewrite: (path) => '/api/auth' + path,
 }));
 
 // Protected Routes
 app.use('/api/employees', authenticateToken, createProxyMiddleware({
     target: EMPLOYEE_SERVICE_URL,
     changeOrigin: true,
+    pathRewrite: (path) => '/api/employees' + path,
 }));
 
 app.use('/api/attendance', authenticateToken, createProxyMiddleware({
     target: ATTENDANCE_SERVICE_URL,
     changeOrigin: true,
+    pathRewrite: (path) => '/api/attendance' + path,
 }));
 
 app.get('/', (req, res) => {
