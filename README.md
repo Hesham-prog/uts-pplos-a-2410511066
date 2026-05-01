@@ -1,12 +1,13 @@
 # Sistem Kepegawaian & Absensi (Microservices)
 
+**Nama**: Hesham Alsami
 **NIM**: 2410511066  
 **Kelas**: A  
-**Topik**: Sistem Kepegawaian & Absensi (Manajemen pegawai, absensi, pengajuan cuti, rekap kehadiran)  
+**Topik**: Sistem Kepegawaian & Absensi 
 **OAuth**: Google OAuth 2.0  
 
 ## 🎥 Demo Video
-**Link YouTube**: [MASUKKAN_LINK_YOUTUBE_UNLISTED_ANDA_DI_SINI]
+**Link YouTube**: https://youtu.be/SmUqCkLDDlg
 
 ## Arsitektur
 Sistem ini dibangun menggunakan arsitektur Microservices dengan komponen berikut:
