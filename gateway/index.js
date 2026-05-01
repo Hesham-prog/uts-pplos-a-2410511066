@@ -45,23 +45,24 @@ const EMPLOYEE_SERVICE_URL = process.env.EMPLOYEE_SERVICE_URL || 'http://localho
 const ATTENDANCE_SERVICE_URL = process.env.ATTENDANCE_SERVICE_URL || 'http://localhost:3002';
 
 // Route configuration
+// Auth Service: routes are at /google, /google/callback (no prefix needed)
 app.use('/api/auth', createProxyMiddleware({
     target: AUTH_SERVICE_URL,
     changeOrigin: true,
-    pathRewrite: (path) => '/api/auth' + path,
 }));
 
 // Protected Routes
+// Employee Service: Laravel routes at /api/employees, pathRewrite restores the path
 app.use('/api/employees', authenticateToken, createProxyMiddleware({
     target: EMPLOYEE_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: (path) => '/api/employees' + path,
 }));
 
+// Attendance Service: routes at / and /:id (no prefix needed)
 app.use('/api/attendance', authenticateToken, createProxyMiddleware({
     target: ATTENDANCE_SERVICE_URL,
     changeOrigin: true,
-    pathRewrite: (path) => '/api/attendance' + path,
 }));
 
 app.get('/', (req, res) => {
